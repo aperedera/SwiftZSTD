@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B62C86F31DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */; };
+		B62C86F71DF3417000C30F26 /* ZSTDProcessorCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */; };
+		B62C86F91DF3655300C30F26 /* DictionaryZSTDProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */; };
 		B69010D01DE3E2CB00A7B62A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69010CF1DE3E2CB00A7B62A /* main.swift */; };
 		B69010F51DE3E3A500A7B62A /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010D81DE3E3A500A7B62A /* entropy_common.c */; };
 		B69010F61DE3E3A500A7B62A /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010D91DE3E3A500A7B62A /* error_private.c */; };
@@ -38,6 +41,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDDictionaryBuilder.swift; path = ../../ZSTDDictionaryBuilder.swift; sourceTree = "<group>"; };
+		B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDProcessorCommon.swift; path = ../../ZSTDProcessorCommon.swift; sourceTree = "<group>"; };
+		B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryZSTDProcessor.swift; path = ../../DictionaryZSTDProcessor.swift; sourceTree = "<group>"; };
 		B69010CC1DE3E2CB00A7B62A /* ZSTDSampleApp_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ZSTDSampleApp_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69010CF1DE3E2CB00A7B62A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B69010D71DE3E3A500A7B62A /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 		B69010CE1DE3E2CB00A7B62A /* ZSTDSampleApp_1 */ = {
 			isa = PBXGroup;
 			children = (
+				B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */,
+				B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */,
+				B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */,
 				B69011041DE3E6AB00A7B62A /* ZSTDProcessor.swift */,
 				B69011031DE3E46F00A7B62A /* ZSTDSampleApp_1-Bridging-Header.h */,
 				B69010D61DE3E3A500A7B62A /* common */,
@@ -230,10 +239,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69011021DE3E3A500A7B62A /* zdict.c in Sources */,
+				B62C86F91DF3655300C30F26 /* DictionaryZSTDProcessor.swift in Sources */,
 				B69011011DE3E3A500A7B62A /* divsufsort.c in Sources */,
 				B69010FF1DE3E3A500A7B62A /* zbuff_decompress.c in Sources */,
 				B69011051DE3E6AB00A7B62A /* ZSTDProcessor.swift in Sources */,
+				B62C86F31DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift in Sources */,
 				B69010F51DE3E3A500A7B62A /* entropy_common.c in Sources */,
+				B62C86F71DF3417000C30F26 /* ZSTDProcessorCommon.swift in Sources */,
 				B69010F61DE3E3A500A7B62A /* error_private.c in Sources */,
 				B69010F81DE3E3A500A7B62A /* xxhash.c in Sources */,
 				B69010FA1DE3E3A500A7B62A /* fse_compress.c in Sources */,
@@ -353,6 +365,7 @@
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZSTDSampleApp_1-Bridging-Header.h";
+				"SWIFT_OPTIMIZATION_LEVEL[arch=*]" = "-O";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -376,6 +389,7 @@
 				B69010D51DE3E2CB00A7B62A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
