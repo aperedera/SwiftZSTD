@@ -97,8 +97,8 @@ class DictionaryZSTDProcessor
      * Decompress a frame that resulted from a previous compression of a buffer by ZSTD
      * using the dictionary associated with this instance.
      *
-     * @param dataIn: frame to be decompressed
-     * @return a Data instance wrapping the decompressed buffer
+     * - parameter dataIn: frame to be decompressed
+     * - returns: a Data instance wrapping the decompressed buffer
      */
     func decompressFrameUsingDict(_ dataIn : Data) throws -> Data
     {

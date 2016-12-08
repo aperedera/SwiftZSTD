@@ -62,11 +62,11 @@ class ZSTDProcessor
     
     /**
      * Decompress a frame that resulted from a previous compression of a buffer by ZSTD.
-     * The exact frame size must be known, which is available via an the 
+     * The exact frame size must be known, which is available via the 
      * ZSTD_getDecompressedSize() API call.
      *
-     * @param dataIn: frame to be decompressed
-     * @return a Data instance wrapping the decompressed buffer
+     * - parameter dataIn: frame to be decompressed
+     * - returns: a Data instance wrapping the decompressed buffer
      */
     func decompressFrame(_ dataIn : Data) throws -> Data
     {

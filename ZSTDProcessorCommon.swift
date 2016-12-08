@@ -106,12 +106,12 @@ class ZSTDProcessorCommon
 
     /**
      * Decompress a frame that resulted from a previous compression of a buffer by ZSTD.
-     * The exact frame size must be known, which is available via an the 
+     * The exact frame size must be known, which is available via the
      * ZSTD_getDecompressedSize() API call.
      *
-     * @param dataIn: frame to be decompressed
-     * @parem delegateFunction: closure/function to perform specific decompression work
-     * @return a Data instance wrapping the decompressed buffer
+     * - parameter dataIn: frame to be decompressed
+     * - parameter delegateFunction: closure/function to perform specific decompression work
+     * - returns: a Data instance wrapping the decompressed buffer
      */
     func decompressFrameCommon(_ dataIn : Data,
                               _ delegateFunction : (UnsafeMutableRawPointer,
