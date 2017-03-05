@@ -5,57 +5,32 @@
 //  Created by Anatoli on 12/06/16.
 //  Copyright © 2016 Anatoli Peredera. All rights reserved.
 //
+/**
+ * This is a simple MacOS command line program using the wrapper without a dictionary.
+ * This example uses small hard-coded byte arrays; in the real world one would use larger
+ * data items, e.g. those read from files.
+ */
 
 import Foundation
 
-/**
- * This is a simple MacOS command line program using the wrapper.
- * Please insert valid file names instead of placeholders.  
- * Modify the program appropriately if you don't want to use a dictionary.
- */
+var processor = ZSTDProcessor(useContext: true)
 
-let dictData = try? Data(contentsOf: URL(fileURLWithPath: "Path to your dictionary file"))
+let origData = Data(bytes: [3, 4, 12, 244, 32, 7, 10, 12, 13, 111, 222, 133])
 
-//var processor = ZSTDProcessor(useContext: true)
-var processor = DictionaryZSTDProcessor(withDictionary: dictData!, andCompressionLevel: 4)
-
-// Don't use files that are too large; < 100 MB is OK.
-// The compression param is useless now, but would be needed for no-dictionary case.
-func testFile(_ fn : String, usingProcessor : DictionaryZSTDProcessor, withCompressionLevel cl : Int32) -> Void {
-    let testURL = URL(fileURLWithPath: fn)
-
-    if var fileData = try? Data(contentsOf: testURL) {
-        print("Size of original data is \(fileData.count)")
-        do {
-            let compressedData = try processor!.compressBufferUsingDict(fileData)
-            print("Size of compressedData is \(compressedData.count)")
-            let decompressedData = try processor!.decompressFrameUsingDict(compressedData)
-            print("Size of decompressedData is \(decompressedData.count)")
-            if (decompressedData == fileData) {print("Decompressed data same as original!!!") }
-            else { print ("Data discrepancy :(") }
-        }
-        catch ZSTDError.libraryError(let errStr) {
-            print("Error in the library: \(errStr)")
-        }
-        catch {
-            switch error {
-            case ZSTDError.inputNotContiguous:
-                print("Non-contiguous input")
-            default:
-                print("Unknown exception")
-            }
-        }
+do {
+    let compressedData = try processor.compressBuffer(origData, compressionLevel: 4)
+    let decompressedData = try processor.decompressFrame(compressedData)
+    if (decompressedData == origData) {
+        print("Decompressed data is the same as original!")
+    } else {
+        print("Decompressed data is different from original.. :(")
     }
-    else { print("ERROR creating data") }
-}
-
-let fileNames : [String] = [
-    "file1",
-    "file2",
-    "file3"
-]
-
-for fn in fileNames {
-    let fileName = "/directory containing the files/" + fn
-    testFile(fileName, usingProcessor : processor!, withCompressionLevel : 4)
+} catch ZSTDError.libraryError(let errStr) {
+    print("Library error: \(errStr)")
+} catch ZSTDError.invalidCompressionLevel(let lvl){
+    print("Invalid compression level: \(lvl)")
+} catch ZSTDError.inputNotContiguous {
+    print("Input not contiguous.")
+} catch ZSTDError.decompressedSizeUnknown {
+    print("Unknown decompressed size.")
 }

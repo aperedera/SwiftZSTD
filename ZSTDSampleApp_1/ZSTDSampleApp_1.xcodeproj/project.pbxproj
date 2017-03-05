@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B62C86F31DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */; };
-		B62C86F71DF3417000C30F26 /* ZSTDProcessorCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */; };
-		B62C86F91DF3655300C30F26 /* DictionaryZSTDProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */; };
+		B60EDD971E0A272200F2713B /* DictionaryZSTDProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EDD931E0A272200F2713B /* DictionaryZSTDProcessor.swift */; };
+		B60EDD981E0A272200F2713B /* ZSTDDictionaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EDD941E0A272200F2713B /* ZSTDDictionaryBuilder.swift */; };
+		B60EDD991E0A272200F2713B /* ZSTDProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EDD951E0A272200F2713B /* ZSTDProcessor.swift */; };
+		B60EDD9A1E0A272200F2713B /* ZSTDProcessorCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EDD961E0A272200F2713B /* ZSTDProcessorCommon.swift */; };
 		B69010D01DE3E2CB00A7B62A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69010CF1DE3E2CB00A7B62A /* main.swift */; };
 		B69010F51DE3E3A500A7B62A /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010D81DE3E3A500A7B62A /* entropy_common.c */; };
 		B69010F61DE3E3A500A7B62A /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010D91DE3E3A500A7B62A /* error_private.c */; };
@@ -25,7 +26,6 @@
 		B69011001DE3E3A500A7B62A /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010EE1DE3E3A500A7B62A /* zstd_decompress.c */; };
 		B69011011DE3E3A500A7B62A /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010F01DE3E3A500A7B62A /* divsufsort.c */; };
 		B69011021DE3E3A500A7B62A /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = B69010F21DE3E3A500A7B62A /* zdict.c */; };
-		B69011051DE3E6AB00A7B62A /* ZSTDProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69011041DE3E6AB00A7B62A /* ZSTDProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,9 +41,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDDictionaryBuilder.swift; path = ../../ZSTDDictionaryBuilder.swift; sourceTree = "<group>"; };
-		B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDProcessorCommon.swift; path = ../../ZSTDProcessorCommon.swift; sourceTree = "<group>"; };
-		B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryZSTDProcessor.swift; path = ../../DictionaryZSTDProcessor.swift; sourceTree = "<group>"; };
+		B60EDD931E0A272200F2713B /* DictionaryZSTDProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryZSTDProcessor.swift; path = ../../Sources/DictionaryZSTDProcessor.swift; sourceTree = "<group>"; };
+		B60EDD941E0A272200F2713B /* ZSTDDictionaryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDDictionaryBuilder.swift; path = ../../Sources/ZSTDDictionaryBuilder.swift; sourceTree = "<group>"; };
+		B60EDD951E0A272200F2713B /* ZSTDProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDProcessor.swift; path = ../../Sources/ZSTDProcessor.swift; sourceTree = "<group>"; };
+		B60EDD961E0A272200F2713B /* ZSTDProcessorCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDProcessorCommon.swift; path = ../../Sources/ZSTDProcessorCommon.swift; sourceTree = "<group>"; };
 		B69010CC1DE3E2CB00A7B62A /* ZSTDSampleApp_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ZSTDSampleApp_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69010CF1DE3E2CB00A7B62A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B69010D71DE3E3A500A7B62A /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		B69010F31DE3E3A500A7B62A /* zdict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zdict.h; sourceTree = "<group>"; };
 		B69010F41DE3E3A500A7B62A /* zstd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd.h; path = ../../zstdlib/zstd.h; sourceTree = "<group>"; };
 		B69011031DE3E46F00A7B62A /* ZSTDSampleApp_1-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZSTDSampleApp_1-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		B69011041DE3E6AB00A7B62A /* ZSTDProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDProcessor.swift; path = ../../ZSTDProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +107,10 @@
 		B69010CE1DE3E2CB00A7B62A /* ZSTDSampleApp_1 */ = {
 			isa = PBXGroup;
 			children = (
-				B62C86F81DF3655300C30F26 /* DictionaryZSTDProcessor.swift */,
-				B62C86F51DF3417000C30F26 /* ZSTDProcessorCommon.swift */,
-				B62C86F21DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift */,
-				B69011041DE3E6AB00A7B62A /* ZSTDProcessor.swift */,
+				B60EDD931E0A272200F2713B /* DictionaryZSTDProcessor.swift */,
+				B60EDD941E0A272200F2713B /* ZSTDDictionaryBuilder.swift */,
+				B60EDD951E0A272200F2713B /* ZSTDProcessor.swift */,
+				B60EDD961E0A272200F2713B /* ZSTDProcessorCommon.swift */,
 				B69011031DE3E46F00A7B62A /* ZSTDSampleApp_1-Bridging-Header.h */,
 				B69010D61DE3E3A500A7B62A /* common */,
 				B69010E51DE3E3A500A7B62A /* compress */,
@@ -239,14 +239,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69011021DE3E3A500A7B62A /* zdict.c in Sources */,
-				B62C86F91DF3655300C30F26 /* DictionaryZSTDProcessor.swift in Sources */,
 				B69011011DE3E3A500A7B62A /* divsufsort.c in Sources */,
 				B69010FF1DE3E3A500A7B62A /* zbuff_decompress.c in Sources */,
-				B69011051DE3E6AB00A7B62A /* ZSTDProcessor.swift in Sources */,
-				B62C86F31DF3347D00C30F26 /* ZSTDDictionaryBuilder.swift in Sources */,
+				B60EDD971E0A272200F2713B /* DictionaryZSTDProcessor.swift in Sources */,
+				B60EDD981E0A272200F2713B /* ZSTDDictionaryBuilder.swift in Sources */,
 				B69010F51DE3E3A500A7B62A /* entropy_common.c in Sources */,
-				B62C86F71DF3417000C30F26 /* ZSTDProcessorCommon.swift in Sources */,
 				B69010F61DE3E3A500A7B62A /* error_private.c in Sources */,
+				B60EDD9A1E0A272200F2713B /* ZSTDProcessorCommon.swift in Sources */,
 				B69010F81DE3E3A500A7B62A /* xxhash.c in Sources */,
 				B69010FA1DE3E3A500A7B62A /* fse_compress.c in Sources */,
 				B69010D01DE3E2CB00A7B62A /* main.swift in Sources */,
@@ -255,6 +254,7 @@
 				B69011001DE3E3A500A7B62A /* zstd_decompress.c in Sources */,
 				B69010FD1DE3E3A500A7B62A /* zstd_compress.c in Sources */,
 				B69010F71DE3E3A500A7B62A /* fse_decompress.c in Sources */,
+				B60EDD991E0A272200F2713B /* ZSTDProcessor.swift in Sources */,
 				B69010F91DE3E3A500A7B62A /* zstd_common.c in Sources */,
 				B69010FC1DE3E3A500A7B62A /* zbuff_compress.c in Sources */,
 			);
