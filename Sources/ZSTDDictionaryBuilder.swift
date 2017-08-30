@@ -35,6 +35,7 @@ public func buildDictionary(fromSamples : [Data]) throws -> Data {
         totalSampleSize += sample.count
         sampleSizes.append(sample.count)
     }
+    print ("totalSampleSize: \(totalSampleSize)")
     var retVal = Data(count: totalSampleSize / 100)
     
     try samples.withUnsafeBytes{ (pSamples : UnsafePointer<UInt8>) in
