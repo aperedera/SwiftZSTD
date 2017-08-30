@@ -36,8 +36,8 @@ func useZSTD() {
 
 func getDictionary() -> Data? {
     var samples = [Data]()
-    samples.append(Data(bytes: [1,2,3,5,8]))
-    samples.append(Data(bytes: [3,2,1,0]))
+    samples.append(Data(bytes: Array(10...250)))
+    samples.append(Data(bytes: Array(repeating: 123, count: 100_000)))
     samples.append(Data(bytes: [1,3,4,7,11]))
     samples.append(Data(bytes: [0,0,1,1,5,5]))
 
