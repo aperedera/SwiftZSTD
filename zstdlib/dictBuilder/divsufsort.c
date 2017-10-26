@@ -309,7 +309,8 @@ ss_heapsort(const unsigned char *Td, const int *PA, int *SA, int size) {
   for(i = m / 2 - 1; 0 <= i; --i) { ss_fixdown(Td, PA, SA, i, m); }
   if((size % 2) == 0) { SWAP(SA[0], SA[m]); ss_fixdown(Td, PA, SA, 0, m); }
   for(i = m - 1; 0 < i; --i) {
-    t = SA[0], SA[0] = SA[i];
+//    t = SA[0], SA[0] = SA[i];
+      (void)(t = SA[0]), SA[0] = SA[i];
     ss_fixdown(Td, PA, SA, 0, i);
     SA[i] = t;
   }

@@ -19,3 +19,5 @@ FOUNDATION_EXPORT const unsigned char SwiftZSTDVersionString[];
 #import <zstd.h>
 #import <zdict.h>
 
+#import <StreamHelpers.h>
+

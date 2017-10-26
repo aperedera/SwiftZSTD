@@ -64,10 +64,16 @@
 		B6E8FDFB1F4FC4E4007875AC /* pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FDFA1F4FC4E4007875AC /* pool.c */; };
 		B6E8FDFF1F4FCA81007875AC /* cover.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FDFE1F4FCA81007875AC /* cover.c */; };
 		B6E8FE011F4FCAB3007875AC /* threading.h in Headers */ = {isa = PBXBuildFile; fileRef = B6E8FE001F4FCAB3007875AC /* threading.h */; };
-		B6E8FE031F4FCADE007875AC /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FE021F4FCADE007875AC /* zstdmt_compress.c */; };
-		B6E8FE041F4FCD4E007875AC /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FE021F4FCADE007875AC /* zstdmt_compress.c */; };
 		B6E8FE051F4FCD68007875AC /* cover.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FDFE1F4FCA81007875AC /* cover.c */; };
 		B6E8FE061F4FCD6F007875AC /* pool.c in Sources */ = {isa = PBXBuildFile; fileRef = B6E8FDFA1F4FC4E4007875AC /* pool.c */; };
+		B6FD03541F6B6F05000202D8 /* ZSTDStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03531F6B6F05000202D8 /* ZSTDStream.swift */; };
+		B6FD03551F6B6F05000202D8 /* ZSTDStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03531F6B6F05000202D8 /* ZSTDStream.swift */; };
+		B6FD03571F6D1E49000202D8 /* StreamHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03561F6D1E49000202D8 /* StreamHelpers.m */; };
+		B6FD03581F6D1E49000202D8 /* StreamHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03561F6D1E49000202D8 /* StreamHelpers.m */; };
+		B6FD035C1F6D20CF000202D8 /* StreamHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FD03591F6D1F75000202D8 /* StreamHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FD035D1F6D20D6000202D8 /* StreamHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FD03591F6D1F75000202D8 /* StreamHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6FD03651F70A9F2000202D8 /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03641F70A9F2000202D8 /* zstdmt_compress.c */; };
+		B6FD03661F70A9F2000202D8 /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = B6FD03641F70A9F2000202D8 /* zstdmt_compress.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +113,10 @@
 		B6E8FDFA1F4FC4E4007875AC /* pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pool.c; sourceTree = "<group>"; };
 		B6E8FDFE1F4FCA81007875AC /* cover.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cover.c; sourceTree = "<group>"; };
 		B6E8FE001F4FCAB3007875AC /* threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threading.h; sourceTree = "<group>"; };
-		B6E8FE021F4FCADE007875AC /* zstdmt_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zstdmt_compress.c; sourceTree = "<group>"; };
+		B6FD03531F6B6F05000202D8 /* ZSTDStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZSTDStream.swift; path = Sources/ZSTDStream.swift; sourceTree = "<group>"; };
+		B6FD03561F6D1E49000202D8 /* StreamHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamHelpers.m; path = Sources/StreamHelpers.m; sourceTree = "<group>"; };
+		B6FD03591F6D1F75000202D8 /* StreamHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamHelpers.h; path = Sources/StreamHelpers.h; sourceTree = "<group>"; };
+		B6FD03641F70A9F2000202D8 /* zstdmt_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zstdmt_compress.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,10 +179,13 @@
 		B60EDDBD1E0A2EAA00F2713B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B6FD03531F6B6F05000202D8 /* ZSTDStream.swift */,
 				B60EDE011E0A307A00F2713B /* DictionaryZSTDProcessor.swift */,
 				B60EDE021E0A307A00F2713B /* ZSTDDictionaryBuilder.swift */,
 				B60EDE031E0A307A00F2713B /* ZSTDProcessor.swift */,
 				B60EDE041E0A307A00F2713B /* ZSTDProcessorCommon.swift */,
+				B6FD03561F6D1E49000202D8 /* StreamHelpers.m */,
+				B6FD03591F6D1F75000202D8 /* StreamHelpers.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -217,7 +229,7 @@
 		B60EDE1C1E0A30B000F2713B /* compress */ = {
 			isa = PBXGroup;
 			children = (
-				B6E8FE021F4FCADE007875AC /* zstdmt_compress.c */,
+				B6FD03641F70A9F2000202D8 /* zstdmt_compress.c */,
 				B60EDE1D1E0A30B000F2713B /* fse_compress.c */,
 				B60EDE1E1E0A30B000F2713B /* huf_compress.c */,
 				B60EDE201E0A30B000F2713B /* zstd_compress.c */,
@@ -274,6 +286,7 @@
 				B60EDE461E0A30B000F2713B /* zstd_internal.h in Headers */,
 				B60EDE341E0A30B000F2713B /* fse.h in Headers */,
 				B60EDE381E0A30B000F2713B /* huf.h in Headers */,
+				B6FD035C1F6D20CF000202D8 /* StreamHelpers.h in Headers */,
 				B60EDE321E0A30B000F2713B /* error_private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B60EDE3B1E0A30B000F2713B /* mem.h in Headers */,
+				B6FD035D1F6D20D6000202D8 /* StreamHelpers.h in Headers */,
 				B60EDE611E0A30B000F2713B /* zstd.h in Headers */,
 				B60EDE3F1E0A30B000F2713B /* xxhash.h in Headers */,
 				B60EDE5F1E0A30B000F2713B /* zdict.h in Headers */,
@@ -341,11 +355,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					B60EDDA61E0A2C2400F2713B = {
 						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					B60EDDB41E0A2CF100F2713B = {
@@ -404,14 +418,16 @@
 				B60EDE521E0A30B000F2713B /* huf_decompress.c in Sources */,
 				B60EDE581E0A30B000F2713B /* divsufsort.c in Sources */,
 				B60EDE5C1E0A30B000F2713B /* zdict.c in Sources */,
+				B6FD03571F6D1E49000202D8 /* StreamHelpers.m in Sources */,
 				B60EDE481E0A30B000F2713B /* fse_compress.c in Sources */,
 				B60EDE361E0A30B000F2713B /* fse_decompress.c in Sources */,
 				B60EDE421E0A30B000F2713B /* zstd_common.c in Sources */,
+				B6FD03651F70A9F2000202D8 /* zstdmt_compress.c in Sources */,
 				B60EDE4E1E0A30B000F2713B /* zstd_compress.c in Sources */,
 				B60EDE4A1E0A30B000F2713B /* huf_compress.c in Sources */,
 				B60EDE561E0A30B000F2713B /* zstd_decompress.c in Sources */,
-				B6E8FE031F4FCADE007875AC /* zstdmt_compress.c in Sources */,
 				B60EDE3C1E0A30B000F2713B /* xxhash.c in Sources */,
+				B6FD03541F6B6F05000202D8 /* ZSTDStream.swift in Sources */,
 				B60EDE301E0A30B000F2713B /* error_private.c in Sources */,
 				B60EDE051E0A307A00F2713B /* DictionaryZSTDProcessor.swift in Sources */,
 				B6E8FDFB1F4FC4E4007875AC /* pool.c in Sources */,
@@ -424,20 +440,22 @@
 			files = (
 				B60EDE2F1E0A30B000F2713B /* entropy_common.c in Sources */,
 				B60EDE0A1E0A307A00F2713B /* ZSTDProcessor.swift in Sources */,
-				B6E8FE041F4FCD4E007875AC /* zstdmt_compress.c in Sources */,
 				B6E8FE051F4FCD68007875AC /* cover.c in Sources */,
 				B60EDE081E0A307A00F2713B /* ZSTDDictionaryBuilder.swift in Sources */,
 				B60EDE0C1E0A307A00F2713B /* ZSTDProcessorCommon.swift in Sources */,
 				B60EDE531E0A30B000F2713B /* huf_decompress.c in Sources */,
 				B60EDE591E0A30B000F2713B /* divsufsort.c in Sources */,
+				B6FD03581F6D1E49000202D8 /* StreamHelpers.m in Sources */,
 				B60EDE5D1E0A30B000F2713B /* zdict.c in Sources */,
 				B6E8FE061F4FCD6F007875AC /* pool.c in Sources */,
 				B60EDE491E0A30B000F2713B /* fse_compress.c in Sources */,
 				B60EDE371E0A30B000F2713B /* fse_decompress.c in Sources */,
+				B6FD03661F70A9F2000202D8 /* zstdmt_compress.c in Sources */,
 				B60EDE431E0A30B000F2713B /* zstd_common.c in Sources */,
 				B60EDE4F1E0A30B000F2713B /* zstd_compress.c in Sources */,
 				B60EDE4B1E0A30B000F2713B /* huf_compress.c in Sources */,
 				B60EDE571E0A30B000F2713B /* zstd_decompress.c in Sources */,
+				B6FD03551F6B6F05000202D8 /* ZSTDStream.swift in Sources */,
 				B60EDE3D1E0A30B000F2713B /* xxhash.c in Sources */,
 				B60EDE311E0A30B000F2713B /* error_private.c in Sources */,
 				B60EDE061E0A307A00F2713B /* DictionaryZSTDProcessor.swift in Sources */,
@@ -450,12 +468,18 @@
 		B60EDDA01E0A2AD000F2713B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -475,12 +499,18 @@
 		B60EDDA11E0A2AD000F2713B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -507,6 +537,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -552,13 +583,15 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-Wno-comma";
 				PRODUCT_BUNDLE_IDENTIFIER = com.self.SwiftZSTD;
 				PRODUCT_NAME = SwiftZSTD;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -576,6 +609,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -614,12 +648,14 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-Wno-comma";
 				PRODUCT_BUNDLE_IDENTIFIER = com.self.SwiftZSTD;
 				PRODUCT_NAME = SwiftZSTD;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -677,6 +713,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-Wno-comma";
 				PRODUCT_BUNDLE_IDENTIFIER = com.self.SwiftZSTD;
 				PRODUCT_NAME = SwiftZSTD;
 				SDKROOT = iphoneos;
@@ -735,6 +772,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-Wno-comma";
 				PRODUCT_BUNDLE_IDENTIFIER = com.self.SwiftZSTD;
 				PRODUCT_NAME = SwiftZSTD;
 				SDKROOT = iphoneos;
