@@ -38,9 +38,10 @@ public func buildDictionary(fromSamples : [Data]) throws -> Data {
     print ("totalSampleSize: \(totalSampleSize)")
     var retVal = Data(count: totalSampleSize / 100)
     
-    try samples.withUnsafeBytes{ (pSamples : UnsafePointer<UInt8>) in
-        try retVal.withUnsafeMutableBytes{ (pDict : UnsafeMutablePointer<UInt8>) in
-            let actualDictSize = ZDICT_trainFromBuffer(pDict, retVal.count, pSamples, &sampleSizes, UInt32(Int32(sampleSizes.count)))
+    return try samples.withUnsafeBytes{ (pSamples : UnsafeRawBufferPointer) -> Data in
+        let count: Int = retVal.count
+        retVal.count = try retVal.withUnsafeMutableBytes{ (pDict : UnsafeMutableRawBufferPointer) -> Int in
+            let actualDictSize = ZDICT_trainFromBuffer(pDict.baseAddress, count, pSamples.baseAddress, &sampleSizes, UInt32(Int32(sampleSizes.count)))
             if ZDICT_isError(actualDictSize) != 0 {
                 if let errStr = getDictionaryErrorString(actualDictSize) {
                     throw ZDICTError.libraryError(errMsg: errStr)
@@ -48,13 +49,10 @@ public func buildDictionary(fromSamples : [Data]) throws -> Data {
                     throw ZDICTError.unknownError
                 }
             }
-            else {
-                retVal.count = actualDictSize
-            }
+            return actualDictSize
         }
+        return retVal
     }
-    
-    return retVal
 }
 
 /**

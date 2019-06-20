@@ -14,11 +14,7 @@ import Foundation
 extension Data
 {
     func ZSTDIsContiguousData() -> Bool {
-        var retVal : Bool = false
-        self.enumerateBytes{(pBuf: UnsafeBufferPointer<UInt8>, idx: Data.Index, flag: inout Bool) -> Void in
-            if (pBuf.count == self.count) { retVal = true }
-        }
-        return retVal
+        return (self.regions.count == 1)
     }
 }
 
@@ -92,17 +88,21 @@ class ZSTDProcessorCommon
 
         var retVal = Data(count: ZSTD_compressBound(dataIn.count))
         
-        try dataIn.withUnsafeBytes{ (pIn : UnsafePointer<UInt8>) in
-            try retVal.withUnsafeMutableBytes{ (pOut : UnsafeMutablePointer<UInt8>) in
-                let rc = delegateFunction(pOut, retVal.count, pIn, dataIn.count)
+        return try dataIn.withUnsafeBytes{ (pIn : UnsafeRawBufferPointer) -> Data in
+            let count: Int = retVal.count
+            retVal.count = try retVal.withUnsafeMutableBytes{ (pOut : UnsafeMutableRawBufferPointer) -> Int in
+                guard let pInBaseAdd = pIn.baseAddress, let pOutBaseAdd = pOut.baseAddress else {
+                    throw ZSTDError.unknownError
+                }
+                let rc = delegateFunction(pOutBaseAdd, count, pInBaseAdd, dataIn.count)
                 if let errStr = getProcessorErrorString(rc) {
                     throw ZSTDError.libraryError(errMsg: errStr)
-                } else {
-                    retVal.count = rc
                 }
+                return rc
             }
+           
+            return retVal
         }
-        return retVal
     }
 
     /**
@@ -124,9 +124,8 @@ class ZSTDProcessorCommon
             throw ZSTDError.inputNotContiguous
         }
         
-        var storedDSize : UInt64 = 0
-        dataIn.withUnsafeBytes { (p : UnsafePointer<UInt8>) in
-            storedDSize = ZSTD_getDecompressedSize(p, dataIn.count)
+        let storedDSize = dataIn.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> UInt64 in
+            return ZSTD_getDecompressedSize(p.baseAddress, dataIn.count)
         }
 
         guard storedDSize != 0 else {
@@ -135,9 +134,12 @@ class ZSTDProcessorCommon
         
         var retVal = Data(count: Int(storedDSize))
         
-        try dataIn.withUnsafeBytes{ (pIn : UnsafePointer<UInt8>) in
-            try retVal.withUnsafeMutableBytes{ (pOut : UnsafeMutablePointer<UInt8>) in
-                let rc = delegateFunction(pOut, Int(storedDSize), pIn, dataIn.count)
+        try dataIn.withUnsafeBytes{ (pIn : UnsafeRawBufferPointer) -> Void in
+            try retVal.withUnsafeMutableBytes{ (pOut :UnsafeMutableRawBufferPointer) -> Void in
+                guard let pInBaseAdd = pIn.baseAddress, let pOutBaseAdd = pOut.baseAddress else {
+                    throw ZSTDError.unknownError
+                }
+                let rc = delegateFunction(pOutBaseAdd, Int(storedDSize), pInBaseAdd, dataIn.count)
                 if ZSTD_isError(rc) != 0 {
                     if let errStr = getProcessorErrorString(rc) {
                         throw ZSTDError.libraryError(errMsg: errStr)

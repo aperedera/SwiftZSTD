@@ -27,10 +27,11 @@ public class DictionaryZSTDProcessor
     var compDict : OpaquePointer? {
         struct Junk { static var retVal : OpaquePointer? = nil }
         if Junk.retVal == nil {
-            dict.withUnsafeBytes { (p : UnsafePointer<UInt8>) in
-                    Junk.retVal = ZSTD_createCDict(p, dict.count, compLevel)
-                    haveCDict = true
-            }
+            Junk.retVal = dict.withUnsafeBytes({ (p: UnsafeRawBufferPointer) -> OpaquePointer? in
+                haveCDict = true
+                return ZSTD_createCDict(p.baseAddress, dict.count, compLevel)
+            })
+            
         }
         return Junk.retVal
     }
@@ -38,9 +39,9 @@ public class DictionaryZSTDProcessor
     var decompDict : OpaquePointer? {
         struct Junk { static var retVal : OpaquePointer? = nil }
         if Junk.retVal == nil {
-            dict.withUnsafeBytes { (p : UnsafePointer<UInt8>) in
-                Junk.retVal = ZSTD_createDDict(p, dict.count)
+            Junk.retVal = dict.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> OpaquePointer? in
                 haveDDict = false
+                return ZSTD_createDDict(p.baseAddress, dict.count)
             }
         }
         return Junk.retVal
