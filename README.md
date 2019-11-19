@@ -1,7 +1,7 @@
 # SwiftZSTD
 Swift Wrapper around ZSTD Compression Library
 
-Compression and de-compression of in-memory buffers is supported, with or without a context or a dictionary.  Buffers are represented by Data instances that must use contiguous storage, and in practice most Data instances meet this requirement.  To be decompressed by this code, a buffer must be a complete frame with decompressed size encoded in it and retrievable using ZSTD_getDecompressedSize().  
+Compression and de-compression of in-memory buffers is supported, with or without a context or a dictionary.  Buffers are represented by Data instances.  To be decompressed by this code, a buffer must be a complete frame with decompressed size encoded in it and retrievable using ZSTD_getDecompressedSize().  
 
 This is actually a fairly useful implementation.  Experimentation shows that even fairly large files (100s of MB),when compressed using the zstd utility provided with the C library, end up in a single frame, which is easily decompressible by this Swift code if read into memory as one piece!
 
