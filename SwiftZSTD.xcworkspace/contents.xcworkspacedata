@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ZSTDSampleApp_2/ZSTDSampleApp_2.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:ZSTDSampleApp_1/ZSTDSampleApp_1.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:SwiftZSTD.xcodeproj">
    </FileRef>
 </Workspace>

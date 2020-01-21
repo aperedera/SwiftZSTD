@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B6A3758523CEACDD006C8ED4"
+               BuildableName = "SwiftZSTDTests_iOS.xctest"
+               BlueprintName = "SwiftZSTDTests_iOS"
+               ReferencedContainer = "container:SwiftZSTD.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B60EDDB41E0A2CF100F2713B"
+            BuildableName = "SwiftZSTD.framework"
+            BlueprintName = "SwiftZSTD_iOS"
+            ReferencedContainer = "container:SwiftZSTD.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

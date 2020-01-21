@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B60EDDA61E0A2C2400F2713B"
-               BuildableName = "SwiftZSTD.framework"
-               BlueprintName = "SwiftZSTD_macOS"
+               BlueprintIdentifier = "B6C02D4423D683C40001675F"
+               BuildableName = "iOSTestApp.app"
+               BlueprintName = "iOSTestApp"
                ReferencedContainer = "container:SwiftZSTD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B6A3756723CEA74B006C8ED4"
-               BuildableName = "SwiftZSTDTests_macOS.xctest"
-               BlueprintName = "SwiftZSTDTests_macOS"
+               BlueprintIdentifier = "B6C02D5A23D687520001675F"
+               BuildableName = "iOSTestApp-Tests.xctest"
+               BlueprintName = "iOSTestApp-Tests"
                ReferencedContainer = "container:SwiftZSTD.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B60EDDA61E0A2C2400F2713B"
-            BuildableName = "SwiftZSTD.framework"
-            BlueprintName = "SwiftZSTD_macOS"
+            BlueprintIdentifier = "B6C02D4423D683C40001675F"
+            BuildableName = "iOSTestApp.app"
+            BlueprintName = "iOSTestApp"
             ReferencedContainer = "container:SwiftZSTD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B60EDDA61E0A2C2400F2713B"
-            BuildableName = "SwiftZSTD.framework"
-            BlueprintName = "SwiftZSTD_macOS"
+            BlueprintIdentifier = "B6C02D4423D683C40001675F"
+            BuildableName = "iOSTestApp.app"
+            BlueprintName = "iOSTestApp"
             ReferencedContainer = "container:SwiftZSTD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,15 +79,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B60EDDA61E0A2C2400F2713B"
-            BuildableName = "SwiftZSTD.framework"
-            BlueprintName = "SwiftZSTD_macOS"
+            BlueprintIdentifier = "B6C02D4423D683C40001675F"
+            BuildableName = "iOSTestApp.app"
+            BlueprintName = "iOSTestApp"
             ReferencedContainer = "container:SwiftZSTD.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

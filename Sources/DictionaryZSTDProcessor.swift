@@ -40,7 +40,7 @@ public class DictionaryZSTDProcessor
         struct Junk { static var retVal : OpaquePointer? = nil }
         if Junk.retVal == nil {
             Junk.retVal = dict.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> OpaquePointer? in
-                haveDDict = false
+                haveDDict = true
                 return ZSTD_createDDict(p.baseAddress, dict.count)
             }
         }

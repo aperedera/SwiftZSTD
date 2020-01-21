@@ -1,6 +1,5 @@
 //
 //  ZSTDDictionaryBuilder.swift
-//  ZSTDSampleApp_1
 //
 //  Created by Anatoli on 12/06/16.
 //  Copyright © 2016 Anatoli Peredera. All rights reserved.
@@ -17,7 +16,7 @@ public enum ZDICTError : Error {
 }
 
 /**
- * Build a dictionary from samples identified by an array Data instances.
+ * Build a dictionary from samples identified by an array of Data instances.
  *
  * The target dictionary size is 100th of the total sample size as 
  * recommended by documentation.
@@ -35,7 +34,7 @@ public func buildDictionary(fromSamples : [Data]) throws -> Data {
         totalSampleSize += sample.count
         sampleSizes.append(sample.count)
     }
-    print ("totalSampleSize: \(totalSampleSize)")
+//    print ("totalSampleSize: \(totalSampleSize)")
     var retVal = Data(count: totalSampleSize / 100)
     
     return try samples.withUnsafeBytes{ (pSamples : UnsafeRawBufferPointer) -> Data in
