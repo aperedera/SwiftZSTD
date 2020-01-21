@@ -8,22 +8,10 @@
 import Foundation
 
 /**
- * An extension providing a method to determine if the bytes of a Data are stored
- * in contiguous memory.
- */
-extension Data
-{
-    func ZSTDIsContiguousData() -> Bool {
-        return (self.regions.count == 1)
-    }
-}
-
-/**
  * Types of exceptions thrown by the wrapper.
  */
 public enum ZSTDError : Error {
     case libraryError(errMsg : String)
-    case inputNotContiguous
     case decompressedSizeUnknown
     case invalidCompressionLevel(cl: Int32)
     case unknownError
@@ -35,7 +23,9 @@ public enum ZSTDError : Error {
  * compression/decompression are not yet supported, these can be added later.
  *
  * One of the tricks here is to minimize copying of the buffers being processed.  Also, the
- * Data instances provided as input must use contiguous storage.
+ * Data instances provided as input must use contiguous storage, which it does as of Swift 5,
+ * see this SO post:
+ * https://stackoverflow.com/questions/58229364/determine-if-a-data-instance-is-contiguous
  */
 class ZSTDProcessorCommon
 {
@@ -82,10 +72,6 @@ class ZSTDProcessorCommon
                                                     UnsafeRawPointer,
                                                     Int)->Int ) throws -> Data
     {
-        guard dataIn.ZSTDIsContiguousData() else {
-            throw ZSTDError.inputNotContiguous
-        }
-
         var retVal = Data(count: ZSTD_compressBound(dataIn.count))
         
         return try dataIn.withUnsafeBytes{ (pIn : UnsafeRawBufferPointer) -> Data in
@@ -120,9 +106,6 @@ class ZSTDProcessorCommon
                                                     UnsafeRawPointer,
                                                     Int)->Int ) throws -> Data
     {
-        guard dataIn.ZSTDIsContiguousData() else {
-            throw ZSTDError.inputNotContiguous
-        }
         
         let storedDSize = dataIn.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> UInt64 in
             return ZSTD_getDecompressedSize(p.baseAddress, dataIn.count)
