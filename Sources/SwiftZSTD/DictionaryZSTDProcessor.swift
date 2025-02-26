@@ -20,33 +20,25 @@ public class DictionaryZSTDProcessor
     let compLevel : Int32
     
     // We need these boolean properties to check if a dictionary exists when
-    // deinitializing.  Otherwise, checking for a computed property like decompDict
+    // deinitializing.  Otherwise, just accessing a lazy property like decompDict
     // will actually cause a dictionary digest to be created, an expensive operation.
     var haveCDict = false
     var haveDDict = false
-    
-    var compDict : OpaquePointer? {
-        struct Junk { static var retVal : OpaquePointer? = nil }
-        if Junk.retVal == nil {
-            Junk.retVal = dict.withUnsafeBytes({ (p: UnsafeRawBufferPointer) -> OpaquePointer? in
-                haveCDict = true
-                return ZSTD_createCDict(p.baseAddress, dict.count, compLevel)
-            })
-            
-        }
-        return Junk.retVal
-    }
 
-    var decompDict : OpaquePointer? {
-        struct Junk { static var retVal : OpaquePointer? = nil }
-        if Junk.retVal == nil {
-            Junk.retVal = dict.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> OpaquePointer? in
-                haveDDict = true
-                return ZSTD_createDDict(p.baseAddress, dict.count)
-            }
+    lazy var compDict : OpaquePointer = {
+
+        dict.withUnsafeBytes({ (p: UnsafeRawBufferPointer) -> OpaquePointer in
+            haveCDict = true
+            return ZSTD_createCDict(p.baseAddress, dict.count, compLevel)
+        })
+    } ()
+
+    lazy var decompDict : OpaquePointer = {
+        dict.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> OpaquePointer in
+            haveDDict = true
+            return ZSTD_createDDict(p.baseAddress, dict.count)
         }
-        return Junk.retVal
-    }
+    } ()
 
     /**
      * Initialize using a dictionary and compression level.

@@ -9,5 +9,5 @@ Streaming compression and decompression is also supported, but not with a dictio
 
 The relevant ZSTD C code has been added to the repository since it is compiled as part of the Xcode project.  See https://github.com/facebook/zstd for additional information, including licensing.
 
-The wrapper is packaged as a framework and includes the ZSTD C code as part of the target.  Other approaches could have been used, e.g. the ZSTD lib could have been packaged as an external library, static or dynamic.  
+The wrapper is an SPM package and includes the ZSTD C code as a separate target.  Other approaches could have been used, e.g. the ZSTD lib could have been packaged as an external library, static or dynamic.  
 

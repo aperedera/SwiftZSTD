@@ -22,7 +22,30 @@ class SwiftZSTDBasicTests: XCTestCase {
             }
         }
     }
-    
+
+    func testWithDictionaryTwice() {
+        checkPlatform()
+
+        if let dictData = getDictionary() {
+            var origData = Data([123, 231, 132, 100, 20, 10, 5, 2, 1])
+            if let compData = compressWithDictionary(origData, dictData) {
+                if let decompData = decompressWithDictionary(compData, dictData) {
+                    XCTAssertEqual(decompData, origData,
+                              "First pass: Decompressed data is different from original (using dictionary)")
+                }
+            }
+
+           origData = Data([223, 232, 132, 120, 20, 10, 5, 2, 100])
+           if let compData = compressWithDictionary(origData, dictData) {
+                if let decompData = decompressWithDictionary(compData, dictData) {
+                    XCTAssertEqual(decompData, origData,
+                              "Second pass: Decompressed data is different from original (using dictionary)")
+                }
+            }
+
+        }
+    }
+
     func testWithoutDictionary() {
         checkPlatform()
         
@@ -34,7 +57,7 @@ class SwiftZSTDBasicTests: XCTestCase {
             let compressedData = try processor.compressBuffer(origData, compressionLevel: 4)
             let decompressedData = try processor.decompressFrame(compressedData)
             XCTAssertEqual(decompressedData, origData,
-                           "Decompressed data is different from original (not using dictionary")
+                           "Decompressed data is different from original (not using dictionary)")
         } catch ZSTDError.libraryError(let errStr) {
             XCTFail("Library error: \(errStr)")
         } catch ZSTDError.invalidCompressionLevel(let lvl){
@@ -44,16 +67,6 @@ class SwiftZSTDBasicTests: XCTestCase {
         } catch  {
             XCTFail("Unknown error")
         }
-    }
-    
-    private func checkPlatform() {
-        #if os(OSX)
-        print("TESTING ON macOS!")
-        #elseif os(iOS)
-        print("TESTING ON iOS!")
-        #else
-        XCTFail("BAD PLATFORM")
-        #endif
     }
     
     private func getDictionary() -> Data? {

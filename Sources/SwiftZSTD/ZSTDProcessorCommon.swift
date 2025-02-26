@@ -19,12 +19,11 @@ public enum ZSTDError : Error {
 }
 
 /**
- * Common functionality of a Swift wrapper around the ZSTD C library.  Only compression and
- * decompression of a buffer in memory is currently supported. Streaming mode and file 
- * compression/decompression are not yet supported, these can be added later.
+ * Common functionality of the Swift wrapper around the ZSTD C library.  Only compression and
+ * decompression of buffers in memory is currently supported. 
  *
  * One of the tricks here is to minimize copying of the buffers being processed.  Also, the
- * Data instances provided as input must use contiguous storage, which it does as of Swift 5,
+ * Data instances provided as input must use contiguous storage, which is the case as of Swift 5,
  * see this SO post:
  * https://stackoverflow.com/questions/58229364/determine-if-a-data-instance-is-contiguous
  */

@@ -31,7 +31,7 @@ public class ZSTDStream {
     // if no compression operation has been performed using this instance yet.
     var compOC : CompressionOC? = nil
     
-    // An Objective-C class instance wrapping C compression API.  It can be nil
+    // An Objective-C class instance wrapping C decompression API.  It can be nil
     // if no decompression operation has been performed using this instance yet.
     var decompOC : DecompressionOC? = nil
     
@@ -119,7 +119,7 @@ public class ZSTDStream {
      * - parameter dataIn: chunk of data to add to the stream being decompressed
      * - parameter isDone: true if a frame has been completely decompressed, i.e. no
      *      more input is expected
-     * - returns: compressed chunk of data to be wrtitten to the decompressed output
+     * - returns: decompressed chunk of data to be wrtitten to the decompressed output
      */
     public func decompressionProcess(dataIn : Data, isDone : inout Bool) throws -> Data {
         guard let unwrappedDecompOC = decompOC else { throw ZSTDStreamError.operationNotStarted }
