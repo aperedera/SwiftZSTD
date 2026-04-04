@@ -12,7 +12,7 @@ class SwiftZSTDStreamTests: XCTestCase {
     func testCompressDecompress() {
         checkPlatform()
         
-        let origChunk1 = Data([123, 231, 132, 100, 20, 10, 5, 2, 1])
+        let origChunk1 = Data([123, 231, 132, 100, 20, 10, 5, 2, 1, 2, 20, 200, 100, 50, 25, 12])
         let origChunk2 = Data([123, 131, 232, 100, 20, 10, 15, 22, 1])
         
         var origData = origChunk1
@@ -26,14 +26,22 @@ class SwiftZSTDStreamTests: XCTestCase {
         
         try? streamProcessor.startDecompression()
         var isDone : Bool = false
-        let decompressedData = try? streamProcessor.decompressionProcess(dataIn: compressedData, isDone: &isDone)
         
+        let splitPoint = compressedData.count / 2
+        let compressedData1 = compressedData.subdata(in: 0..<splitPoint )
+        let compressedData2 = compressedData.subdata(in: splitPoint..<compressedData.count )
+        var decompressedData = try? streamProcessor.decompressionProcess(dataIn: compressedData1, isDone: &isDone)
+        if isDone {
+            XCTFail("Stream decompression ended prematurely")
+        }
+        let decompressedData2 = try? streamProcessor.decompressionProcess(dataIn: compressedData2, isDone: &isDone)
         if !isDone {
             XCTFail("Stream decompression was not successful")
         } else {
+            decompressedData!.append(decompressedData2!)
             XCTAssertEqual(decompressedData, origData,
                            "Stream-decompressed data is different from original (not using dictionary)")
         }
     }
-    
+
 }

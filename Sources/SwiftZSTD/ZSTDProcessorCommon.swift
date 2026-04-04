@@ -94,7 +94,7 @@ class ZSTDProcessorCommon
     /**
      * Decompress a frame that resulted from a previous compression of a buffer by ZSTD.
      * The exact frame size must be known, which is available via the
-     * ZSTD_getDecompressedSize() API call.
+     * ZSTD_getFrameContentSize() API call.
      *
      * - parameter dataIn: frame to be decompressed
      * - parameter delegateFunction: closure/function to perform specific decompression work
@@ -108,7 +108,7 @@ class ZSTDProcessorCommon
     {
         
         let storedDSize = dataIn.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> UInt64 in
-            return ZSTD_getDecompressedSize(p.baseAddress, dataIn.count)
+            return ZSTD_getFrameContentSize(p.baseAddress, dataIn.count)
         }
 
         guard storedDSize != 0 else {

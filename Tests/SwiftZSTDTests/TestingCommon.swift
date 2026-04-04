@@ -1,9 +1,11 @@
+import XCTest
+
     func checkPlatform() {
-        #if os(OSX)
+        #if os(macOS)
         print("TESTING ON macOS!")
         #elseif os(iOS)
         print("TESTING ON iOS!")
         #else
-        XCTFail("BAD PLATFORM")
+        XCTFail("UNSUPPORTED PLATFORM")
         #endif
     }

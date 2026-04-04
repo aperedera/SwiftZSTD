@@ -7,7 +7,6 @@
 
 import Foundation
 import zstdlib
-import SwiftZSTDC
 
 /**
  * Exceptions thrown by the dictionary builder.
