@@ -2,13 +2,14 @@
 
 A subset of the underlying C library functionality is exposed as a Swift API.  Simple core API, context-based, and streaming operations are supported.  Dictionaries are also supported, but not with streaming at this time.  
 
-To compress or decompress a file small enough to be stored in memory, read it into a buffer (`Data` instance) and then use `ZSTDProcessor`, `DictionaryZSTDProcessor`, or `ZSTDStream`.
+To compress or decompress a file small enough to be stored in memory, read it into a buffer (`Data` instance) and then use `ZSTDProcessor`, `DictionaryZSTDProcessor`, or `ZSTDStream`.  Please note that a file being decompressed must be a single compressed frame.
 
 To compress a large file that does not conveniently fit into memory
 - Read the file in chunks, e.g. using `InputStream`.
 - Use `ZSTDProcessor`, `DictionaryZSTDProcessor`, or `ZSTDStream` to compress each chunk.
 	- Using `ZSTDStream` will result in an output file containing a single frame.
 - Write each compressed chunk to the output file, e.g. using `OutputStream`.
+
 To decompress a large file that contains a single compressed frame, read the file in chunks, decompress each using `ZSTDStream`, and write it to the output file.
 
 When using this code in your project, please build with compiler optimization enabled.  

@@ -15,6 +15,7 @@ public enum ZSTDError : Error {
     case libraryError(errMsg : String)
     case decompressedSizeUnknown
     case invalidCompressionLevel(cl: Int32)
+    case dataIsNotFrame
     case unknownError
 }
 
@@ -109,6 +110,18 @@ class ZSTDProcessorCommon
         
         let storedDSize = dataIn.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> UInt64 in
             return ZSTD_getFrameContentSize(p.baseAddress, dataIn.count)
+        }
+
+        let frameSize = dataIn.withUnsafeBytes { (p : UnsafeRawBufferPointer) -> Int in
+            return ZSTD_findFrameCompressedSize(p.baseAddress, dataIn.count)
+        }
+
+        if let errStr = getProcessorErrorString(frameSize) {
+            throw ZSTDError.libraryError(errMsg: "Cannot determine frame size: " + errStr)
+        }
+
+        guard frameSize == dataIn.count else {
+            throw ZSTDError.dataIsNotFrame
         }
 
         guard storedDSize != 0 else {

@@ -67,6 +67,8 @@ public class ZSTDProcessor
      * Decompress a frame that resulted from a previous compression of a buffer by a call
      * to compressBuffer().
      *
+     * Please note that the buffer being decompressed must be exactly a single compressed frame!
+     *
      * - parameter dataIn: frame to be decompressed
      * - returns: a Data instance wrapping the decompressed buffer
      */
