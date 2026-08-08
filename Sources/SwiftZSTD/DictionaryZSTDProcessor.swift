@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import zstdlib
+import libzstd
 
 /**
  * A class to compress a buffer into a frame or to decompress a frame using a 

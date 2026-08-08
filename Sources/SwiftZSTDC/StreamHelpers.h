@@ -6,7 +6,7 @@
 //
 //
 
-#import <zstdlib.h>
+#import <zstd.h>
 
 @interface CompressionOC : NSObject
 

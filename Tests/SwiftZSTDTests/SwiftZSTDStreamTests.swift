@@ -4,6 +4,8 @@
 //  Created by Anatoli on 2/11/25.
 //
 
+#if !os(Linux) && !os(Windows)
+
 import XCTest
 @testable import SwiftZSTD
 
@@ -45,3 +47,4 @@ class SwiftZSTDStreamTests: XCTestCase {
     }
 
 }
+#endif

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import zstdlib
+import libzstd
 
 /**
  * Exceptions thrown by the dictionary builder.

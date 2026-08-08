@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import zstdlib
+import libzstd
 
 /**
  * Class that supports compression/decompression of an in-memory buffer without using

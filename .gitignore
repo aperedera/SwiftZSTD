@@ -3,3 +3,4 @@ DerivedData/
 .DS_Store
 .swiftpm/
 .build/
+Package.resolved

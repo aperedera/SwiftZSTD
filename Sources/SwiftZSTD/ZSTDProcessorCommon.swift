@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import zstdlib
+import libzstd
 
 /**
  * Types of exceptions thrown by the wrapper.

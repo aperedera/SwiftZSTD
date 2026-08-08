@@ -8,29 +8,16 @@ let package = Package(
     products: [
         .library(
             name: "SwiftZSTD",
-            targets: ["SwiftZSTD", "SwiftZSTDC", "zstdlib"]),
+            targets: ["SwiftZSTD"]),
     ],
-    dependencies: [],
+    dependencies: [ .package(url: "https://github.com/facebook/zstd", from: "1.5.7") ],
     targets: [
         .target(
             name: "SwiftZSTD",
-            dependencies: ["SwiftZSTDC", "zstdlib"]),
+            dependencies: [.target(name: "SwiftZSTDC", condition: .when(platforms: [.macOS, .iOS])), .product(name: "libzstd", package: "zstd")]),
         .target(
             name: "SwiftZSTDC",
-            dependencies: ["zstdlib"],
-            publicHeadersPath: "include"),
-        .target(
-            name: "zstdlib",
-            dependencies: [],
-            exclude: ["LICENSE"],
-            publicHeadersPath: "include",
-            cSettings: [
-                .headerSearchPath("common"),
-                .headerSearchPath("compress"),
-                .headerSearchPath("decompress"),
-                .headerSearchPath("dictBuilder"),
-                .headerSearchPath("include/zstdlib")
-            ]),
+            dependencies: [.product(name: "libzstd", package: "zstd")]),
         .testTarget(
             name: "SwiftZSTDTests",
             dependencies: ["SwiftZSTD"]),

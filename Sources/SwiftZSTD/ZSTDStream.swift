@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+#if !os(Linux) && !os(Windows)
+
 import SwiftZSTDC
 
 /**
@@ -139,3 +142,41 @@ public class ZSTDStream {
     }
 
 }
+#else
+
+public enum ZSTDPlatformError: Error {
+    case unsupportedPlatform
+}
+
+/**
+ * This is a temporary dummy implementation to be used while the code is being updated
+ * for Linux support.
+ *
+ * This is to be removed soon in a future release.
+ */
+public class ZSTDStream {
+
+    public init() {}
+
+    public func startCompression(compressionLevel : Int32) throws {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
+    public func compressionProcess(dataIn : Data) throws -> Data {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
+    public func compressionFinalize(dataIn : Data) throws -> Data {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
+    public func startDecompression() throws {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
+    public func decompressionProcess(dataIn : Data, isDone : inout Bool) throws -> Data {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+}
+
+#endif
