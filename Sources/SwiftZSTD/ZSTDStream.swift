@@ -124,6 +124,7 @@ public class ZSTDStream {
      *      more input is expected
      * - returns: decompressed chunk of data to be wrtitten to the decompressed output
      */
+    @available(*, deprecated, message: "This is being deprecated...")
     public func decompressionProcess(dataIn : Data, isDone : inout Bool) throws -> Data {
         guard let unwrappedDecompOC = decompOC else { throw ZSTDStreamError.operationNotStarted }
         guard unwrappedDecompOC.inProgress else { throw ZSTDStreamError.operationNotStarted }

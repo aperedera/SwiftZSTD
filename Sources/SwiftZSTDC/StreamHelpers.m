@@ -102,7 +102,8 @@
     inBuffer.src = d.bytes;
     inBuffer.pos = 0;
     inBuffer.size = d.length;
-    
+
+    puts("ENTERED processData");
     ZSTD_outBuffer outBuffer;
     outBuffer.dst = outputData;
     outBuffer.pos = 0;
@@ -116,10 +117,11 @@
     NSMutableData * retVal = [NSMutableData dataWithCapacity: 3 * d.length];
 
     do {
+        puts("LOOPING processData");
         size_t rc = ZSTD_decompressStream(dStream, &outBuffer, &inBuffer);
         if (ZSTD_isError(rc)) { *errorCode = rc; return nil; }
         [retVal appendBytes:outBuffer.dst length:outBuffer.pos];
-        if (rc == 0) { self.inProgress = NO;  return retVal; }
+        //if (rc == 0) { self.inProgress = NO;  return retVal; }
         outBuffer.pos = 0;
     } while (inBuffer.pos < inBuffer.size);
 
