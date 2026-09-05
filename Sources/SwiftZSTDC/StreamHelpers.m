@@ -78,6 +78,7 @@
     ZSTD_DStream * dStream;
     uint8_t * outputData;
     size_t outputSize;
+    BOOL frameDone;
 }
 
 -(id)init {
@@ -87,6 +88,7 @@
     
     dStream = ZSTD_createDStream();
     self.inProgress = NO;
+    frameDone = NO;
     
     return self;
 }
@@ -94,10 +96,11 @@
 -(BOOL)start {
     if (self.inProgress) return NO;
     ZSTD_initDStream(dStream);
+    frameDone = NO;
     return self.inProgress = YES;
 }
 
--(NSData *)processData:(NSData *)d withErrorCode:(size_t*)errorCode {    
+-(NSData *)processData:(NSData *)d singleFrame:(BOOL)flag withErrorCode:(size_t*)errorCode {
     ZSTD_inBuffer inBuffer;
     inBuffer.src = d.bytes;
     inBuffer.pos = 0;
@@ -118,14 +121,25 @@
 
     do {
         puts("LOOPING processData");
+        frameDone = NO;
         size_t rc = ZSTD_decompressStream(dStream, &outBuffer, &inBuffer);
         if (ZSTD_isError(rc)) { *errorCode = rc; return nil; }
+        printf("About to append %zu bytes to retVal\n", outBuffer.pos);
         [retVal appendBytes:outBuffer.dst length:outBuffer.pos];
-        //if (rc == 0) { self.inProgress = NO;  return retVal; }
+        if (rc == 0) {
+            if (flag) {
+                self.inProgress = NO;  return retVal;
+            } else frameDone = YES;
+        }
         outBuffer.pos = 0;
     } while (inBuffer.pos < inBuffer.size);
 
     return retVal;
+}
+
+-(BOOL)finalizeOperation {
+    self.inProgress = NO;
+    return frameDone;
 }
 
 -(void)dealloc {

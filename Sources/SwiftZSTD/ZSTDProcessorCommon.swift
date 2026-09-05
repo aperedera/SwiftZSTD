@@ -16,6 +16,7 @@ public enum ZSTDError : Error {
     case decompressedSizeUnknown
     case invalidCompressionLevel(cl: Int32)
     case dataIsNotFrame
+    case extraDataAfterFrame
     case unknownError
 }
 

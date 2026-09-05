@@ -119,18 +119,23 @@ public class ZSTDStream {
     
     /**
      * Process a chunk of data as part of a stream being decompressed.
+     *
+     * CAUTION: This works only if all the chunks in the stream comprise a single frame! As
+     * soon as the frame end is reached, isDone is set to true, the rest of the chunk is ignored,
+     * and subsequent calls to this method will throw operationNotStarted.
+     *
      * - parameter dataIn: chunk of data to add to the stream being decompressed
      * - parameter isDone: true if a frame has been completely decompressed, i.e. no
      *      more input is expected
      * - returns: decompressed chunk of data to be wrtitten to the decompressed output
      */
-    @available(*, deprecated, message: "This is being deprecated...")
+    @available(*, deprecated, message: "This works only for a single frame.")
     public func decompressionProcess(dataIn : Data, isDone : inout Bool) throws -> Data {
         guard let unwrappedDecompOC = decompOC else { throw ZSTDStreamError.operationNotStarted }
         guard unwrappedDecompOC.inProgress else { throw ZSTDStreamError.operationNotStarted }
         
         var rc : Int = 0
-        guard let retData = unwrappedDecompOC.processData(dataIn, withErrorCode: &rc)
+        guard let retData = unwrappedDecompOC.processData(dataIn, singleFrame: true, withErrorCode: &rc)
         else {
             if let errStr = getProcessorErrorString(rc) {
                 throw ZSTDError.libraryError(errMsg: errStr)
@@ -142,6 +147,55 @@ public class ZSTDStream {
         return retData
     }
 
+    /**
+     * Process a chunk of data as part of a stream being decompressed.
+     *
+     * Please note that this ZSTDStream instance won't be available to start another
+     * decompression operation until decompressionFinalize() is called.
+     *
+     * - parameter dataIn: chunk of data to add to the stream being decompressed
+     * - returns: decompressed chunk of data to be wrtitten to the decompressed output
+     */
+    public func decompressionProcess(dataIn : Data) throws -> Data {
+        return try decompressionHelper(dataIn: dataIn, finalize: false)
+    }
+
+    /**
+     * Process the last chunk of data from a stream being decompressed and make the ZSTDStream
+     * instance available for a new decompression operation.
+     *
+     * An additional benefit of this call is that it will throw extraDataAfterFrame if more
+     * compressed data is found after the last frame boundary in the chunk.
+     *
+     * - parameter dataIn: chunk of data to add to the stream being decompressed
+     * - returns: decompressed chunk of data to be wrtitten to the decompressed output
+     */
+    public func decompressionFinalize(dataIn : Data) throws -> Data {
+        return try decompressionHelper(dataIn: dataIn, finalize: true)
+    }
+
+    fileprivate func decompressionHelper(dataIn : Data, finalize: Bool) throws -> Data {
+        guard let unwrappedDecompOC = decompOC else { throw ZSTDStreamError.operationNotStarted }
+        guard unwrappedDecompOC.inProgress else { throw ZSTDStreamError.operationNotStarted }
+
+        var rc : Int = 0
+        guard let retData = unwrappedDecompOC.processData(dataIn, singleFrame: false, withErrorCode: &rc)
+        else {
+            if let errStr = getProcessorErrorString(rc) {
+                throw ZSTDError.libraryError(errMsg: errStr)
+            } else {
+                throw ZSTDError.unknownError
+            }
+        }
+
+        if finalize {
+            if !unwrappedDecompOC.finalizeOperation() {
+                throw ZSTDError.extraDataAfterFrame
+            }
+        }
+
+        return retData
+    }
 }
 #else
 
@@ -178,6 +232,15 @@ public class ZSTDStream {
     public func decompressionProcess(dataIn : Data, isDone : inout Bool) throws -> Data {
         throw ZSTDPlatformError.unsupportedPlatform
     }
+
+    public func decompressionProcess(dataIn : Data) throws -> Data {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
+    public func decompressionFinalize(dataIn : Data) throws -> Data {
+        throw ZSTDPlatformError.unsupportedPlatform
+    }
+
 }
 
 #endif

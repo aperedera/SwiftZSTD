@@ -24,6 +24,7 @@
 
 -(id)init;
 -(BOOL)start;
--(NSData *)processData:(NSData *)dataIn withErrorCode:(size_t*)errorCode;
+-(NSData *)processData:(NSData *)dataIn singleFrame:(BOOL)flag withErrorCode:(size_t*)errorCode;
+-(BOOL)finalizeOperation;
 
 @end
