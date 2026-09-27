@@ -37,6 +37,8 @@ public class ZSTDStream {
     // An Objective-C class instance wrapping C decompression API.  It can be nil
     // if no decompression operation has been performed using this instance yet.
     var decompOC : DecompressionOC? = nil
+
+    public private(set) var lastDecompressionError : String? = nil
     
     public init() {}
     
@@ -175,6 +177,7 @@ public class ZSTDStream {
     }
 
     fileprivate func decompressionHelper(dataIn : Data, finalize: Bool) throws -> Data {
+        lastDecompressionError = nil
         guard let unwrappedDecompOC = decompOC else { throw ZSTDStreamError.operationNotStarted }
         guard unwrappedDecompOC.inProgress else { throw ZSTDStreamError.operationNotStarted }
 
@@ -188,9 +191,14 @@ public class ZSTDStream {
             }
         }
 
+        if rc != 0 { lastDecompressionError = getProcessorErrorString(rc) }
+
         if finalize {
             if !unwrappedDecompOC.finalizeOperation() {
-                throw ZSTDError.extraDataAfterFrame
+                let extraData = "Incomplete frame at end of input"
+                if let lastErrorTmp = lastDecompressionError {
+                    lastDecompressionError = lastErrorTmp + "; " + extraData
+                } else { lastDecompressionError = extraData }
             }
         }
 

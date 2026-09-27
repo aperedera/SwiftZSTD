@@ -106,7 +106,6 @@
     inBuffer.pos = 0;
     inBuffer.size = d.length;
 
-    puts("ENTERED processData");
     ZSTD_outBuffer outBuffer;
     outBuffer.dst = outputData;
     outBuffer.pos = 0;
@@ -118,13 +117,17 @@
     // Even using 0 for the initial capacity works, so it is just a slight
     // efficiency improvement.
     NSMutableData * retVal = [NSMutableData dataWithCapacity: 3 * d.length];
+    BOOL haveData = NO;
 
     do {
-        puts("LOOPING processData");
         frameDone = NO;
         size_t rc = ZSTD_decompressStream(dStream, &outBuffer, &inBuffer);
-        if (ZSTD_isError(rc)) { *errorCode = rc; return nil; }
-        printf("About to append %zu bytes to retVal\n", outBuffer.pos);
+        if (ZSTD_isError(rc)) {
+            *errorCode = rc;
+            if (haveData) return retVal;
+            else return nil;
+        }
+        if (outBuffer.pos > 0) haveData = YES;
         [retVal appendBytes:outBuffer.dst length:outBuffer.pos];
         if (rc == 0) {
             if (flag) {
